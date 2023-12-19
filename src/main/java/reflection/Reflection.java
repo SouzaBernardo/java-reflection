@@ -1,25 +1,13 @@
 package reflection;
 
-import java.lang.reflect.Constructor;
 
 public class Reflection {
 
-    private String className;
-
-    private Constructor<?> constructor;
-
-    public Reflection reflectionClass(String className) {
-        return this;
-    }
-
-    public Reflection getConstructor() {
-        return this;
-    }
-
-    public Object invoke() {
+    public ClassManipulator reflectionClass(String className) {
         try {
-            return constructor.newInstance();
-        } catch (Exception e) {
+            Class<?> aClass = Class.forName(className);
+            return new ClassManipulator(aClass);
+        } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
     }

@@ -9,9 +9,18 @@ public class Main {
     public static void main(String[] args) {
         try {
             exampleConstructors();
+            exampleConstructorByBuilder();
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+    }
+
+    private static void exampleConstructorByBuilder() {
+        Object invoke = new Reflection()
+                .reflectionClass(REFLECTION_DOG)
+                .getDefaultConstructor()
+                .invoke();
+        System.out.println(invoke);
     }
 
     private static void exampleConstructors() throws ClassNotFoundException,
