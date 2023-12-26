@@ -9,8 +9,8 @@ public class Main {
 
     public static void main(String[] args) {
         try {
-//            exampleConstructors();
-//            exampleConstructorByBuilder();
+            exampleConstructors();
+            exampleConstructorByBuilder();
             exampleMethod();
         } catch (Exception e) {
             throw new RuntimeException(e);
