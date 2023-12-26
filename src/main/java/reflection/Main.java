@@ -1,6 +1,7 @@
 package reflection;
 
 import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 
 public class Main {
 
@@ -8,15 +9,32 @@ public class Main {
 
     public static void main(String[] args) {
         try {
-            exampleConstructors();
-            exampleConstructorByBuilder();
+//            exampleConstructors();
+//            exampleConstructorByBuilder();
+            exampleMethod();
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
 
+    private static void exampleMethod() throws ClassNotFoundException, InvocationTargetException, IllegalAccessException {
+
+        var myClass = Class.forName(REFLECTION_DOG);
+
+        for (Method method : myClass.getMethods()) {
+            System.out.println(method);
+        }
+
+        var declaredMethod = myClass.getDeclaredMethods()[0];
+        var invoke = new Reflection()
+                .reflectionClass(REFLECTION_DOG)
+                .getDefaultConstructor()
+                .invoke();
+        System.out.println(declaredMethod.invoke(invoke));
+    }
+
     private static void exampleConstructorByBuilder() {
-        Object invoke = new Reflection()
+        var invoke = new Reflection()
                 .reflectionClass(REFLECTION_DOG)
                 .getDefaultConstructor()
                 .invoke();
