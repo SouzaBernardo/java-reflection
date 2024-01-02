@@ -28,4 +28,8 @@ public class ClassManipulator {
             return null;
         }
     }
+
+    public Class<?> getReflectedClass() {
+        return aClass;
+    }
 }

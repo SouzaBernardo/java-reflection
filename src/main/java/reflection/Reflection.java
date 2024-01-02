@@ -11,8 +11,4 @@ public class Reflection {
             throw new RuntimeException(e);
         }
     }
-
-    public static Class<?> getClass(String className) throws ClassNotFoundException {
-        return Class.forName(className);
-    }
 }

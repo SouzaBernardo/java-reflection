@@ -19,7 +19,9 @@ public class Main {
     }
 
     private static void exampleMethodWithParameters() throws ClassNotFoundException, InvocationTargetException, IllegalAccessException {
-        var myClass = Reflection.getClass(REFLECTION_DOG);
+        var myClass = new Reflection()
+                .reflectionClass(REFLECTION_DOG)
+                .getReflectedClass();
 
         var instance = new Reflection()
                 .reflectionClass(REFLECTION_DOG)
