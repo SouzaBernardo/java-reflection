@@ -14,6 +14,9 @@ public class Dog {
     public String sayHi() {
         return "Hi, my name is " + name;
     }
+    public String sayHiTo(String toSay) {
+        return String.format("Hi %s, my name is %s", toSay, name);
+    }
 
     @Override
     public String toString() {

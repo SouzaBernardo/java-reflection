@@ -2,6 +2,9 @@ package reflection;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Stream;
 
 public class Main {
 
@@ -12,9 +15,30 @@ public class Main {
             exampleConstructors();
             exampleConstructorByBuilder();
             exampleMethod();
+            exampleMethodWithParameters();
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+    }
+
+    private static void exampleMethodWithParameters() throws ClassNotFoundException, InvocationTargetException, IllegalAccessException {
+        var myClass = Reflection.getClass(REFLECTION_DOG);
+
+        for (Method method : myClass.getMethods()) {
+            System.out.println(method);
+        }
+
+        var instance = new Reflection()
+                .reflectionClass(REFLECTION_DOG)
+                .getDefaultConstructorWithStringParameter()
+                .invokeWithParameter("Little dog");
+
+        var list = Stream.of(myClass.getMethods())
+                .filter(method -> "sayHiTo".equals(method.getName()))
+                .toList();
+
+        System.out.println(list.get(0).invoke(instance, "Jorge"));
+
     }
 
     private static void exampleMethod() throws ClassNotFoundException, InvocationTargetException, IllegalAccessException {

@@ -17,4 +17,13 @@ public class ConstructorManipulator {
             return null;
         }
     }
+
+    public Object invokeWithParameter(String parameter) {
+        try {
+            return constructor.newInstance(parameter);
+        } catch (Exception e) {
+            System.out.println("Error on constructor");
+            return null;
+        }
+    }
 }

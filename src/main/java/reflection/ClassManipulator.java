@@ -18,4 +18,14 @@ public class ClassManipulator {
             return null;
         }
     }
+
+    public ConstructorManipulator getDefaultConstructorWithStringParameter() {
+        try {
+            Constructor<?> declaredConstructor = aClass.getDeclaredConstructor(String.class);
+            return new ConstructorManipulator(declaredConstructor);
+        } catch (NoSuchMethodException e) {
+            System.out.println("Error on get Constructor with String");
+            return null;
+        }
+    }
 }
