@@ -13,12 +13,26 @@ public class Main {
             exampleConstructorByBuilder();
             exampleMethod();
             exampleMethodWithParameters();
+            exampleInvokeWithMethodManipulator();
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
 
-    private static void exampleMethodWithParameters() throws ClassNotFoundException, InvocationTargetException, IllegalAccessException {
+    private static void exampleInvokeWithMethodManipulator() {
+        var instance = new Reflection()
+                .reflectionClass(REFLECTION_DOG)
+                .getDefaultConstructorWithStringParameter()
+                .invokeWithParameter("Little dog")
+                .handleException((method, error) -> {
+                    System.out.println("Error on method: " + method.getName());
+                    throw new RuntimeException(error);
+                });
+
+        System.out.println(instance.invoke("sayHiTo", "Vi"));
+    }
+
+    private static void exampleMethodWithParameters() throws InvocationTargetException, IllegalAccessException {
         var myClass = new Reflection()
                 .reflectionClass(REFLECTION_DOG)
                 .getReflectedClass();

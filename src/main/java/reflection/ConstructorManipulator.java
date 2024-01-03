@@ -3,27 +3,19 @@ package reflection;
 import java.lang.reflect.Constructor;
 
 public class ConstructorManipulator {
+    private final Class<?> aClass;
     private final Constructor<?> constructor;
 
-    public ConstructorManipulator(Constructor<?> constructor) {
+    public ConstructorManipulator(Class<?> aClass, Constructor<?> constructor) {
+        this.aClass = aClass;
         this.constructor = constructor;
     }
 
-    public Object invoke() {
-        try {
-            return constructor.newInstance();
-        } catch (Exception e) {
-            System.out.println("Error on constructor");
-            return null;
-        }
+    public MethodManipulator invoke() {
+        return new MethodManipulator(aClass, constructor);
     }
 
-    public Object invokeWithParameter(String parameter) {
-        try {
-            return constructor.newInstance(parameter);
-        } catch (Exception e) {
-            System.out.println("Error on constructor");
-            return null;
-        }
+    public MethodManipulator invokeWithParameter(String parameter) {
+        return new MethodManipulator(aClass, constructor, parameter);
     }
 }
