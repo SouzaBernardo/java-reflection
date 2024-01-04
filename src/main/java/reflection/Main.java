@@ -6,10 +6,11 @@ import java.util.stream.Stream;
 public class Main {
 
     public static final String REFLECTION_DOG = "reflection.Dog";
+    public static final String PARAMETER_NAME = "sayHiTo";
 
     public static void main(String[] args) {
         try {
-            exampleConstructors();
+            exampleGetDeclaredConstructors();
             exampleConstructorByBuilder();
             exampleMethod();
             exampleMethodWithParameters();
@@ -24,6 +25,8 @@ public class Main {
                 .reflectionClass(REFLECTION_DOG)
                 .getDefaultConstructorWithStringParameter()
                 .invokeWithParameter("Little dog")
+        var instance = Reflection
+                .reflection(REFLECTION_DOG)
                 .handleException((method, error) -> {
                     System.out.println("Error on method: " + method.getName());
                     throw new RuntimeException(error);
@@ -35,15 +38,19 @@ public class Main {
     private static void exampleMethodWithParameters() throws InvocationTargetException, IllegalAccessException {
         var myClass = new Reflection()
                 .reflectionClass(REFLECTION_DOG)
+        var myClass = Reflection
+                .reflection(REFLECTION_DOG)
                 .getReflectedClass();
 
         var instance = new Reflection()
                 .reflectionClass(REFLECTION_DOG)
                 .getDefaultConstructorWithStringParameter()
                 .invokeWithParameter("Little dog");
+        var instance = Reflection
+                .reflection(REFLECTION_DOG)
 
         var list = Stream.of(myClass.getMethods())
-                .filter(method -> "sayHiTo".equals(method.getName()))
+                .filter(method -> PARAMETER_NAME.equals(method.getName()))
                 .toList();
 
         System.out.println(list.get(0).invoke(instance, "Jorge"));
@@ -59,6 +66,8 @@ public class Main {
                 .reflectionClass(REFLECTION_DOG)
                 .getDefaultConstructor()
                 .invoke();
+        var invoke = Reflection
+                .reflection(REFLECTION_DOG)
         System.out.println(declaredMethod.invoke(invoke));
     }
 
@@ -67,14 +76,16 @@ public class Main {
                 .reflectionClass(REFLECTION_DOG)
                 .getDefaultConstructor()
                 .invoke();
+        var invoke = Reflection
+                .reflection(REFLECTION_DOG)
         System.out.println(invoke);
     }
 
-    private static void exampleConstructors() throws ClassNotFoundException,
-                                                    NoSuchMethodException,
-                                                    InstantiationException,
-                                                    IllegalAccessException,
-                                                    InvocationTargetException {
+    private static void exampleGetDeclaredConstructors() throws ClassNotFoundException,
+            NoSuchMethodException,
+            InstantiationException,
+            IllegalAccessException,
+            InvocationTargetException {
         var dogClass = Class.forName(REFLECTION_DOG);
         var simpleConstructor = dogClass.getDeclaredConstructor();
         var constructorWithString = dogClass.getDeclaredConstructor(String.class);

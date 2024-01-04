@@ -3,12 +3,14 @@ package reflection;
 
 public class Reflection {
 
-    public ClassManipulator reflectionClass(String className) {
+    public static ClassManipulator reflection(String className) {
         try {
             Class<?> aClass = Class.forName(className);
             return new ClassManipulator(aClass);
         } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
+            String errorMessage = "Error on Reflect class with name >> " + className;
+            System.out.println(errorMessage);
+            throw new RuntimeException(errorMessage, e);
         }
     }
 }
