@@ -5,11 +5,19 @@ import java.lang.reflect.Constructor;
 public class ConstructorManipulator {
     private final Class<?> aClass;
     private final Constructor<?> constructor;
+    private final String constructorParam;
 
 
     public ConstructorManipulator(Class<?> aClass, Constructor<?> constructor) {
         this.aClass = aClass;
         this.constructor = constructor;
+        this.constructorParam = "";
+    }
+
+    public ConstructorManipulator(Class<?> aClass, Constructor<?> constructor, String constructorParam) {
+        this.aClass = aClass;
+        this.constructor = constructor;
+        this.constructorParam = constructorParam;
     }
 
     public Object build() {
@@ -32,7 +40,7 @@ public class ConstructorManipulator {
         }
     }
 
-    public MethodManipulator useMethod(String methodName) {
-        return new MethodManipulator(aClass.getDeclaredMethods(), methodName, constructor);
+    public MethodManipulator useMethod() {
+        return new MethodManipulator(aClass.getDeclaredMethods(), constructorParam, constructor);
     }
 }

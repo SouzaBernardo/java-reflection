@@ -6,7 +6,7 @@ import java.util.stream.Stream;
 public class Main {
 
     public static final String REFLECTION_DOG = "reflection.Dog";
-    public static final String PARAMETER_NAME = "sayHiTo";
+    public static final String METHOD_NAME = "sayHiTo";
 
     public static void main(String[] args) {
         try {
@@ -24,12 +24,12 @@ public class Main {
         var instance = Reflection
                 .reflection(REFLECTION_DOG)
                 .constructor("Little Dog")
-                .useMethod("sayHiTo")
+                .useMethod()
                 .handleException((method, error) -> {
-                    System.out.println("Error on method: " + method.getName());
-                    throw new RuntimeException("Error on method: " + method.getName());
+                    System.out.println("Error on method: " + error.getMessage());
+                    throw new RuntimeException("Error on method: " + method);
                 })
-                .invokeMethod("Vii");
+                .invoke(METHOD_NAME,  "Vii");
         System.out.println(instance);
     }
 
@@ -44,7 +44,7 @@ public class Main {
                 .build("Little Dog");
 
         var list = Stream.of(myClass.getMethods())
-                .filter(method -> PARAMETER_NAME.equals(method.getName()))
+                .filter(method -> METHOD_NAME.equals(method.getName()))
                 .toList();
 
         System.out.println(list.get(0).invoke(instance, "Jorge"));

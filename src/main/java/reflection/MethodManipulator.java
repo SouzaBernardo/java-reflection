@@ -12,9 +12,9 @@ public class MethodManipulator {
     private final String constructorParameter;
     private final List<Method> methods;
 
-    public MethodManipulator(Method[] declaredMethods, String methodName, Constructor<?> constructor) {
+    public MethodManipulator(Method[] declaredMethods, String constructorParameter, Constructor<?> constructor) {
         this.methods = List.of(declaredMethods);
-        this.constructorParameter = methodName;
+        this.constructorParameter = constructorParameter;
         this.constructor = constructor;
     }
 
@@ -23,7 +23,7 @@ public class MethodManipulator {
         return this;
     }
 
-    public Object invokeMethod(String parameter) {
+    public Object invoke(String methodName, String parameter) {
         Method methodToInvoke = null;
         try {
             Object instance;
@@ -31,17 +31,17 @@ public class MethodManipulator {
             if (this.constructorParameter.isEmpty())
                 instance = constructor.newInstance();
             else
-                instance = constructor.newInstance(this.constructorParameter);
+                instance = constructor.newInstance(constructorParameter);
 
             methodToInvoke = methods.stream()
-                    .filter(method -> method.getName().equals(constructorParameter))
+                    .filter(method -> method.getName().equals(methodName))
                     .findFirst()
                     .orElseThrow();
 
             return methodToInvoke.invoke(instance, parameter);
         } catch (Exception e) {
             if (handleException != null)
-                handleException.apply(methodToInvoke, e);
+                return handleException.apply(methodToInvoke, e);
             throw new RuntimeException(e);
         }
     }

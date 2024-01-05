@@ -32,7 +32,7 @@ public class ClassManipulator {
     public ConstructorManipulator constructor(String constructorParam) {
         try {
             Constructor<?> declaredConstructor = aClass.getDeclaredConstructor(constructorParam.getClass());
-            return new ConstructorManipulator(aClass, declaredConstructor);
+            return new ConstructorManipulator(aClass, declaredConstructor, constructorParam);
         } catch (NoSuchMethodException e) {
             System.out.println("Constructor not found");
             throw new RuntimeException(e);
