@@ -9,7 +9,7 @@ public class ClassManipulator {
         this.aClass = aClass;
     }
 
-    public ConstructorManipulator getDefaultConstructor() {
+    public ConstructorManipulator constructor() {
         try {
             Constructor<?> declaredConstructor = aClass.getDeclaredConstructor();
             return new ConstructorManipulator(aClass, declaredConstructor);
@@ -19,15 +19,24 @@ public class ClassManipulator {
         }
     }
 
-    public ConstructorManipulator getDefaultConstructorWithStringParameter(){
-        Constructor<?> declaredConstructor;
+    public ConstructorManipulator constructor(Class<?> constructorParam) {
         try {
-            declaredConstructor = aClass.getDeclaredConstructor(String.class);
+            Constructor<?> declaredConstructor = aClass.getDeclaredConstructor(constructorParam);
+            return new ConstructorManipulator(aClass, declaredConstructor);
         } catch (NoSuchMethodException e) {
             System.out.println("Constructor not found");
             throw new RuntimeException(e);
         }
-        return new ConstructorManipulator(aClass, declaredConstructor);
+    }
+
+    public ConstructorManipulator constructor(String constructorParam) {
+        try {
+            Constructor<?> declaredConstructor = aClass.getDeclaredConstructor(constructorParam.getClass());
+            return new ConstructorManipulator(aClass, declaredConstructor);
+        } catch (NoSuchMethodException e) {
+            System.out.println("Constructor not found");
+            throw new RuntimeException(e);
+        }
     }
 
     public Class<?> getReflectedClass() {

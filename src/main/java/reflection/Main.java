@@ -21,33 +21,27 @@ public class Main {
     }
 
     private static void exampleInvokeWithMethodManipulator() {
-        var instance = new Reflection()
-                .reflectionClass(REFLECTION_DOG)
-                .getDefaultConstructorWithStringParameter()
-                .invokeWithParameter("Little dog")
         var instance = Reflection
                 .reflection(REFLECTION_DOG)
+                .constructor("Little Dog")
+                .useMethod("sayHiTo")
                 .handleException((method, error) -> {
                     System.out.println("Error on method: " + method.getName());
-                    throw new RuntimeException(error);
-                });
-
-        System.out.println(instance.invoke("sayHiTo", "Vi"));
+                    throw new RuntimeException("Error on method: " + method.getName());
+                })
+                .invokeMethod("Vii");
+        System.out.println(instance);
     }
 
     private static void exampleMethodWithParameters() throws InvocationTargetException, IllegalAccessException {
-        var myClass = new Reflection()
-                .reflectionClass(REFLECTION_DOG)
         var myClass = Reflection
                 .reflection(REFLECTION_DOG)
                 .getReflectedClass();
 
-        var instance = new Reflection()
-                .reflectionClass(REFLECTION_DOG)
-                .getDefaultConstructorWithStringParameter()
-                .invokeWithParameter("Little dog");
         var instance = Reflection
                 .reflection(REFLECTION_DOG)
+                .constructor(String.class)
+                .build("Little Dog");
 
         var list = Stream.of(myClass.getMethods())
                 .filter(method -> PARAMETER_NAME.equals(method.getName()))
@@ -62,22 +56,18 @@ public class Main {
         var myClass = Class.forName(REFLECTION_DOG);
 
         var declaredMethod = myClass.getDeclaredMethods()[0];
-        var invoke = new Reflection()
-                .reflectionClass(REFLECTION_DOG)
-                .getDefaultConstructor()
-                .invoke();
         var invoke = Reflection
                 .reflection(REFLECTION_DOG)
+                .constructor()
+                .build();
         System.out.println(declaredMethod.invoke(invoke));
     }
 
     private static void exampleConstructorByBuilder() {
-        var invoke = new Reflection()
-                .reflectionClass(REFLECTION_DOG)
-                .getDefaultConstructor()
-                .invoke();
         var invoke = Reflection
                 .reflection(REFLECTION_DOG)
+                .constructor()
+                .build();
         System.out.println(invoke);
     }
 
