@@ -1,11 +1,11 @@
-package reflection;
+package reflection.partOne;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.stream.Stream;
 
 public class Main {
 
-    public static final String REFLECTION_DOG = "reflection.Dog";
+    public static final String REFLECTION_DOG = "reflection.partOne.Dog";
     public static final String METHOD_NAME = "sayHiTo";
 
     public static void main(String[] args) {

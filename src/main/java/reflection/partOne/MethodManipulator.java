@@ -1,4 +1,4 @@
-package reflection;
+package reflection.partOne;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;

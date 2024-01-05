@@ -1,4 +1,4 @@
-package reflection;
+package reflection.partOne;
 
 import java.lang.reflect.Constructor;
 
@@ -11,7 +11,7 @@ public class ClassManipulator {
 
     public ConstructorManipulator constructor() {
         try {
-            Constructor<?> declaredConstructor = aClass.getDeclaredConstructor();
+            var declaredConstructor = aClass.getDeclaredConstructor();
             return new ConstructorManipulator(aClass, declaredConstructor);
         } catch (NoSuchMethodException e) {
             System.out.println("Error on get Default Constructor");
@@ -21,7 +21,7 @@ public class ClassManipulator {
 
     public ConstructorManipulator constructor(Class<?> constructorParam) {
         try {
-            Constructor<?> declaredConstructor = aClass.getDeclaredConstructor(constructorParam);
+            var declaredConstructor = aClass.getDeclaredConstructor(constructorParam);
             return new ConstructorManipulator(aClass, declaredConstructor);
         } catch (NoSuchMethodException e) {
             System.out.println("Constructor not found");
@@ -31,7 +31,7 @@ public class ClassManipulator {
 
     public ConstructorManipulator constructor(String constructorParam) {
         try {
-            Constructor<?> declaredConstructor = aClass.getDeclaredConstructor(constructorParam.getClass());
+            var declaredConstructor = aClass.getDeclaredConstructor(constructorParam.getClass());
             return new ConstructorManipulator(aClass, declaredConstructor, constructorParam);
         } catch (NoSuchMethodException e) {
             System.out.println("Constructor not found");
