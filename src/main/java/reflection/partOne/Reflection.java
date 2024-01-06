@@ -13,4 +13,8 @@ public class Reflection {
             throw new RuntimeException(errorMessage, e);
         }
     }
+
+    public static ClassManipulator reflection(Class<?> aClass) {
+            return new ClassManipulator(aClass);
+    }
 }
