@@ -1,6 +1,8 @@
 package reflection.partOne;
 
-import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
+import java.util.List;
+import java.util.stream.Stream;
 
 public class ClassManipulator {
     private final Class<?> aClass;
@@ -37,6 +39,16 @@ public class ClassManipulator {
             System.out.println("Constructor not found");
             throw new RuntimeException(e);
         }
+    }
+
+    public List<Field> declaredFields() {
+        return List.of(aClass.getDeclaredFields());
+    }
+
+    public List<Field> declaredPrivateFields() {
+        return Stream.of(aClass.getDeclaredFields())
+                .peek(field -> field.setAccessible(true))
+                .toList();
     }
 
     public Class<?> getReflectedClass() {
