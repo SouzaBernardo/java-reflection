@@ -25,8 +25,10 @@ public class Main {
         var reflectedClass = Reflection.reflection(DOMAIN + className)
                 .getReflectedClass();
 
-        var xml = xmlService.convertToXml(PRODUCTS);
-        System.out.println(xml);
+        var xmlProducts = xmlService.convertToXml(PRODUCTS);
+        var xmlProduct = xmlService.convertToXml(PRODUCTS.get(0));
+        System.out.println(xmlProducts);
+        System.out.println(xmlProduct);
 
 //        scanner.close();
     }
