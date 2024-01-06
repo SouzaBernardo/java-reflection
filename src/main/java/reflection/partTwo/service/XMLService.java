@@ -22,18 +22,18 @@ public class XMLService {
     private String convert(Object object) throws IllegalAccessException {
         var xmlBuilder = new StringBuilder();
         if (object instanceof Collection<?> collection) {
-            addStartXMLObject(xmlBuilder, "list");
+            openXMLObject(xmlBuilder, "list");
             collection.forEach(o -> {
                 var xmlField = convertToXml(o);
                 xmlBuilder.append(xmlField);
             });
-            addEndXMLObject(xmlBuilder, "list");
+            closeXMLObject(xmlBuilder, "list");
         } else {
             var className = object.getClass();
             var fields = Reflection.reflection(className)
                     .declaredPrivateFields();
 
-            addStartXMLObject(xmlBuilder, className.getSimpleName());
+            openXMLObject(xmlBuilder, className.getSimpleName());
             for (Field field : fields) {
                 var fieldName = field.getName();
                 var fieldValue = field.get(object);
@@ -41,7 +41,7 @@ public class XMLService {
                 xmlBuilder.append(fieldValue);
                 addXMLFieldBreakingLine(xmlBuilder, fieldName);
             }
-            addEndXMLObject(xmlBuilder, className.getSimpleName());
+            closeXMLObject(xmlBuilder, className.getSimpleName());
         }
         return xmlBuilder.toString();
     }
@@ -59,13 +59,13 @@ public class XMLService {
                 .append(">\n");
     }
 
-    private void addStartXMLObject(StringBuilder xmlBuilder, String fieldName) {
+    private void openXMLObject(StringBuilder xmlBuilder, String fieldName) {
         addTab(xmlBuilder);
         addXMLFieldBreakingLine(xmlBuilder, fieldName);
         GAPS++;
     }
 
-    private void addEndXMLObject(StringBuilder xmlBuilder, String fieldName) {
+    private void closeXMLObject(StringBuilder xmlBuilder, String fieldName) {
         GAPS--;
         addTab(xmlBuilder);
         addXMLFieldBreakingLine(xmlBuilder, fieldName);
