@@ -1,10 +1,16 @@
 package reflection.partTwo.domain;
 
+import reflection.partTwo.annotations.TagXML;
+
+@TagXML("product")
 public class Product {
 
+    @TagXML("id")
     private final int id;
+    @TagXML("name")
     private final String name;
     private final Double price;
+    @TagXML("brand")
     private final String label;
 
     public Product(int id, String name, Double price, String label) {
