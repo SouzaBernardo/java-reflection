@@ -14,21 +14,22 @@ public class Main {
     public static final List<Product> PRODUCTS = createProducts();
 
     public static void main(String[] args) {
+        final var pathService = new PathService();
+        final var xmlService = new XMLService();
 //        var scanner = new Scanner(System.in);
 //        var userInput = scanner.nextLine();
 //        var pathResponse = PathService.validPath(userInput);
-        var pathResponse = PathService.validPath("/product/1");
+        var pathResponse = pathService.validPath("/product/1");
 
         var className = pathResponse.getClassName();
         var reflectedClass = Reflection.reflection(DOMAIN + className)
                 .getReflectedClass();
 
-        var xml = XMLService.convertToXml(PRODUCTS);
+        var xml = xmlService.convertToXml(PRODUCTS);
         System.out.println(xml);
 
 //        scanner.close();
     }
-
 
 
     private static List<Product> createProducts() {

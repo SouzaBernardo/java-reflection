@@ -7,7 +7,7 @@ public class PathService {
 
     public static final String SLASH = "/";
 
-    public static PathResponse validPath(String path) {
+    public PathResponse validPath(String path) {
 
         if (!path.startsWith("/"))
             throw new InvalidPathException(path + " shouldn't start without '/'");

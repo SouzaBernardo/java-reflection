@@ -8,7 +8,7 @@ import java.util.Collection;
 public class XMLService {
 
 
-    public static String convertToXml(Object object) {
+    public String convertToXml(Object object) {
         try {
             return convert(object);
         } catch (IllegalAccessException e) {
@@ -16,7 +16,7 @@ public class XMLService {
         }
     }
 
-    private static String convert(Object object) throws IllegalAccessException {
+    private String convert(Object object) throws IllegalAccessException {
 
         var xmlBuilder = new StringBuilder();
 
@@ -49,13 +49,13 @@ public class XMLService {
         return xmlBuilder.toString();
     }
 
-    private static void addStartXMLField(StringBuilder xmlBuilder, String fieldName) {
+    private void addStartXMLField(StringBuilder xmlBuilder, String fieldName) {
         xmlBuilder.append("<")
                 .append(fieldName)
                 .append(">");
     }
 
-    private static void addEndXMLField(StringBuilder xmlBuilder, String fieldName) {
+    private void addEndXMLField(StringBuilder xmlBuilder, String fieldName) {
         xmlBuilder.append("<")
                 .append(fieldName)
                 .append(">");
