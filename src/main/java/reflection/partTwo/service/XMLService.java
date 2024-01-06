@@ -7,6 +7,9 @@ import java.util.Collection;
 
 public class XMLService {
 
+    public static final String GAP = "  ";
+    private static int GAPS = 0;
+
 
     public String convertToXml(Object object) {
         try {
@@ -17,47 +20,60 @@ public class XMLService {
     }
 
     private String convert(Object object) throws IllegalAccessException {
-
         var xmlBuilder = new StringBuilder();
-
         if (object instanceof Collection<?> collection) {
-            xmlBuilder.append("<list>");
+            addStartXMLObject(xmlBuilder, "list");
             collection.forEach(o -> {
                 var xmlField = convertToXml(o);
                 xmlBuilder.append(xmlField);
             });
-            xmlBuilder.append("</list>");
+            addEndXMLObject(xmlBuilder, "list");
         } else {
-            var className = object.getClass().getName();
+            var className = object.getClass();
             var fields = Reflection.reflection(className)
                     .declaredPrivateFields();
 
-            addStartXMLField(xmlBuilder, className);
-
+            addStartXMLObject(xmlBuilder, className.getSimpleName());
             for (Field field : fields) {
-
                 var fieldName = field.getName();
                 var fieldValue = field.get(object);
-
-                addStartXMLField(xmlBuilder, fieldName);
+                addXMLField(xmlBuilder, fieldName);
                 xmlBuilder.append(fieldValue);
-                addEndXMLField(xmlBuilder, fieldName);
+                addXMLFieldBreakingLine(xmlBuilder, fieldName);
             }
-
-            addEndXMLField(xmlBuilder, className);
+            addEndXMLObject(xmlBuilder, className.getSimpleName());
         }
         return xmlBuilder.toString();
     }
 
-    private void addStartXMLField(StringBuilder xmlBuilder, String fieldName) {
+    private void addXMLField(StringBuilder xmlBuilder, String fieldName) {
+        addTab(xmlBuilder);
         xmlBuilder.append("<")
                 .append(fieldName)
                 .append(">");
     }
 
-    private void addEndXMLField(StringBuilder xmlBuilder, String fieldName) {
-        xmlBuilder.append("<")
+    private void addXMLFieldBreakingLine(StringBuilder xmlBuilder, String fieldName) {
+        xmlBuilder.append("</")
                 .append(fieldName)
-                .append(">");
+                .append(">\n");
+    }
+
+    private void addStartXMLObject(StringBuilder xmlBuilder, String fieldName) {
+        addTab(xmlBuilder);
+        addXMLFieldBreakingLine(xmlBuilder, fieldName);
+        GAPS++;
+    }
+
+    private void addEndXMLObject(StringBuilder xmlBuilder, String fieldName) {
+        GAPS--;
+        addTab(xmlBuilder);
+        addXMLFieldBreakingLine(xmlBuilder, fieldName);
+    }
+
+    private void addTab(StringBuilder xmlBuilder) {
+        if (GAPS > 0) {
+            xmlBuilder.append(GAP.repeat(GAPS));
+        }
     }
 }
