@@ -1,9 +1,13 @@
 package reflection.partTwo.service;
 
 import reflection.partOne.Reflection;
+import reflection.partTwo.annotations.TagXML;
 
 import java.lang.reflect.Field;
 import java.util.Collection;
+
+import static java.util.Objects.nonNull;
+import static java.util.Objects.requireNonNull;
 
 public class XMLService {
 
@@ -29,21 +33,42 @@ public class XMLService {
             });
             closeXMLObject(xmlBuilder, "list");
         } else {
-            var className = object.getClass();
-            var fields = Reflection.reflection(className)
+            var objectClass = object.getClass();
+            var fields = Reflection.reflect(objectClass)
                     .declaredPrivateFields();
 
-            openXMLObject(xmlBuilder, className.getSimpleName());
+            String className = getXmlClassName(objectClass);
+
+            openXMLObject(xmlBuilder, className);
             for (Field field : fields) {
-                var fieldName = field.getName();
+                var fieldName = getXmlFieldName(field);
                 var fieldValue = field.get(object);
                 addXMLField(xmlBuilder, fieldName);
                 xmlBuilder.append(fieldValue);
-                addXMLFieldBreakingLine(xmlBuilder, fieldName);
+                addCloseXMLFieldBreakingLine(xmlBuilder, fieldName);
             }
-            closeXMLObject(xmlBuilder, className.getSimpleName());
+            closeXMLObject(xmlBuilder, className);
         }
         return xmlBuilder.toString();
+    }
+
+    private static String getXmlClassName(Class<?> objectClass) {
+        String name = objectClass.getDeclaredAnnotation(TagXML.class).value();
+        if (nonNull(name)) {
+            return name;
+        }
+        return objectClass.getSimpleName();
+    }
+
+    private static String getXmlFieldName(Field field) {
+        var annotation = field.getAnnotation(TagXML.class);
+        if (nonNull(annotation)) {
+            var name = requireNonNull(annotation).value();
+            if (nonNull(name)) {
+                return name;
+            }
+        }
+        return field.getName();
     }
 
     private void addXMLField(StringBuilder xmlBuilder, String fieldName) {
@@ -53,7 +78,14 @@ public class XMLService {
                 .append(">");
     }
 
-    private void addXMLFieldBreakingLine(StringBuilder xmlBuilder, String fieldName) {
+    private void addOpenXMLFieldBreakingLine(StringBuilder xmlBuilder, String fieldName) {
+        addTab(xmlBuilder);
+        xmlBuilder.append("<")
+                .append(fieldName)
+                .append(">\n");
+    }
+
+    private void addCloseXMLFieldBreakingLine(StringBuilder xmlBuilder, String fieldName) {
         xmlBuilder.append("</")
                 .append(fieldName)
                 .append(">\n");
@@ -61,14 +93,14 @@ public class XMLService {
 
     private void openXMLObject(StringBuilder xmlBuilder, String fieldName) {
         addTab(xmlBuilder);
-        addXMLFieldBreakingLine(xmlBuilder, fieldName);
+        addOpenXMLFieldBreakingLine(xmlBuilder, fieldName);
         GAPS++;
     }
 
     private void closeXMLObject(StringBuilder xmlBuilder, String fieldName) {
         GAPS--;
         addTab(xmlBuilder);
-        addXMLFieldBreakingLine(xmlBuilder, fieldName);
+        addCloseXMLFieldBreakingLine(xmlBuilder, fieldName);
     }
 
     private void addTab(StringBuilder xmlBuilder) {
