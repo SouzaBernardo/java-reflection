@@ -22,7 +22,7 @@ public class Main {
 
     private static void exampleInvokeWithMethodManipulator() {
         var instance = Reflection
-                .reflection(REFLECTION_DOG)
+                .reflect(REFLECTION_DOG)
                 .constructor("Little Dog")
                 .useMethod()
                 .handleException((method, error) -> {
@@ -35,11 +35,11 @@ public class Main {
 
     private static void exampleMethodWithParameters() throws InvocationTargetException, IllegalAccessException {
         var myClass = Reflection
-                .reflection(REFLECTION_DOG)
+                .reflect(REFLECTION_DOG)
                 .getReflectedClass();
 
         var instance = Reflection
-                .reflection(REFLECTION_DOG)
+                .reflect(REFLECTION_DOG)
                 .constructor(String.class)
                 .build("Little Dog");
 
@@ -57,7 +57,7 @@ public class Main {
 
         var declaredMethod = myClass.getDeclaredMethods()[0];
         var invoke = Reflection
-                .reflection(REFLECTION_DOG)
+                .reflect(REFLECTION_DOG)
                 .constructor()
                 .build();
         System.out.println(declaredMethod.invoke(invoke));
@@ -65,7 +65,7 @@ public class Main {
 
     private static void exampleConstructorByBuilder() {
         var invoke = Reflection
-                .reflection(REFLECTION_DOG)
+                .reflect(REFLECTION_DOG)
                 .constructor()
                 .build();
         System.out.println(invoke);

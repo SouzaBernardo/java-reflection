@@ -3,7 +3,7 @@ package reflection.partOne;
 
 public class Reflection {
 
-    public static ClassManipulator reflection(String className) {
+    public static ClassManipulator reflect(String className) {
         try {
             Class<?> aClass = Class.forName(className);
             return new ClassManipulator(aClass);
@@ -14,7 +14,7 @@ public class Reflection {
         }
     }
 
-    public static ClassManipulator reflection(Class<?> aClass) {
+    public static ClassManipulator reflect(Class<?> aClass) {
             return new ClassManipulator(aClass);
     }
 }

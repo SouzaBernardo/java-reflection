@@ -22,7 +22,7 @@ public class Main {
         var pathResponse = pathService.validPath("/product/1");
 
         var className = pathResponse.getClassName();
-        var reflectedClass = Reflection.reflection(DOMAIN + className)
+        var reflectedClass = Reflection.reflect(DOMAIN + className)
                 .getReflectedClass();
 
         var xmlProducts = xmlService.convertToXml(PRODUCTS);
