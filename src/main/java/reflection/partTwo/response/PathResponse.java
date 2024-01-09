@@ -7,15 +7,17 @@ import java.util.Objects;
 public class PathResponse {
 
     private final String className;
-    private final String parameter;
+    private final String method;
+    private final String controllerName;
 
-    public PathResponse(String className, String parameter) {
+    public PathResponse(String className, String method, String controllerName) {
         this.className = className;
-        this.parameter = parameter;
+        this.method = method;
+        this.controllerName = controllerName;
     }
 
-    public String getParameter() {
-        return parameter;
+    public String getMethod() {
+        return method;
     }
 
     public String getClassName() {
