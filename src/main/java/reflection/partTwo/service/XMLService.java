@@ -30,7 +30,7 @@ public class XMLService {
             closeXMLObject(xmlBuilder, "list");
         } else {
             var className = object.getClass();
-            var fields = Reflection.reflection(className)
+            var fields = Reflection.reflect(className)
                     .declaredPrivateFields();
 
             openXMLObject(xmlBuilder, className.getSimpleName());
