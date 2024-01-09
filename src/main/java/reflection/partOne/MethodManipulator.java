@@ -1,13 +1,14 @@
 package reflection.partOne;
 
 import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.List;
 import java.util.function.BiFunction;
 
 public class MethodManipulator {
 
-    private BiFunction<Method, Exception, Object> handleException;
+    private BiFunction<String, Exception, Object> handleException;
     private final Constructor<?> constructor;
     private final String constructorParameter;
     private final List<Method> methods;
@@ -18,7 +19,7 @@ public class MethodManipulator {
         this.constructor = constructor;
     }
 
-    public MethodManipulator handleException(BiFunction<Method, Exception, Object> handle) {
+    public MethodManipulator handleException(BiFunction<String, Exception, Object> handle) {
         this.handleException = handle;
         return this;
     }
@@ -26,23 +27,40 @@ public class MethodManipulator {
     public Object invoke(String methodName, String parameter) {
         Method methodToInvoke = null;
         try {
-            Object instance;
-
-            if (this.constructorParameter.isEmpty())
-                instance = constructor.newInstance();
-            else
-                instance = constructor.newInstance(constructorParameter);
-
-            methodToInvoke = methods.stream()
-                    .filter(method -> method.getName().equals(methodName))
-                    .findFirst()
-                    .orElseThrow();
-
+            Object instance = getInstance();
+            methodToInvoke = filterMethod(methodName);
             return methodToInvoke.invoke(instance, parameter);
         } catch (Exception e) {
             if (handleException != null)
-                return handleException.apply(methodToInvoke, e);
+                return handleException.apply(methodName, e);
             throw new RuntimeException(e);
         }
+    }
+
+    public Object invoke(String methodName) {
+        Method methodToInvoke = null;
+        try {
+            Object instance = getInstance();
+            methodToInvoke = filterMethod(methodName);
+            return methodToInvoke.invoke(instance);
+        } catch (Exception e) {
+            if (handleException != null)
+                return handleException.apply(methodName, e);
+            throw new RuntimeException(e);
+        }
+    }
+
+    private Object getInstance() throws InvocationTargetException, InstantiationException, IllegalAccessException {
+        if (this.constructorParameter.isEmpty())
+            return constructor.newInstance();
+
+        return constructor.newInstance(constructorParameter);
+    }
+
+    private Method filterMethod(String methodName) {
+        return methods.stream()
+                .filter(method -> method.getName().equals(methodName))
+                .findFirst()
+                .orElseThrow();
     }
 }
