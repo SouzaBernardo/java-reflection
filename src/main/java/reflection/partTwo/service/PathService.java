@@ -36,12 +36,12 @@ public class PathService {
                 .replaceFirst(SLASH, "")
                 .split(SLASH);
         String simpleClassName = capitalize(pathParts[0]);
-        String classNameController = capitalizeToController(pathParts[0]);
+        String fullClassName = capitalizeToController(pathParts[0]);
         if (pathParts.length == 1) {
-            return new PathResponse(classNameController, null, classNameController);
+            return new PathResponse(fullClassName, null, simpleClassName);
         }
 
-        return new PathResponse(classNameController, pathParts[1], classNameController);
+        return new PathResponse(fullClassName, pathParts[1], simpleClassName);
     }
 
     private static String capitalizeToController(String className) {

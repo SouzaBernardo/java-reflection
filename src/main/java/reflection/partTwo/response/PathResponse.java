@@ -6,12 +6,12 @@ import java.util.Objects;
 
 public class PathResponse {
 
-    private final String className;
+    private final String fullClassName;
     private final String method;
     private final String controllerName;
 
-    public PathResponse(String className, String method, String controllerName) {
-        this.className = className;
+    public PathResponse(String fullClassName, String method, String controllerName) {
+        this.fullClassName = fullClassName;
         this.method = method;
         this.controllerName = controllerName;
     }
@@ -20,9 +20,9 @@ public class PathResponse {
         return method;
     }
 
-    public String getClassName() {
-        if (Objects.isNull(className) || className.isBlank())
-            throw new InvalidClassNameException(className);
-        return className;
+    public String getFullClassName() {
+        if (Objects.isNull(fullClassName) || fullClassName.isBlank())
+            throw new InvalidClassNameException(fullClassName);
+        return fullClassName;
     }
 }

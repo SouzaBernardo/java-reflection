@@ -23,7 +23,7 @@ public class Main {
 //        var pathResponse = PathService.validPath(userInput);
         var pathResponse = pathService.validPathController("/product/list");
 
-        var result = Reflection.reflect(pathResponse.getClassName())
+        var result = Reflection.reflect(pathResponse.getFullClassName())
                 .constructor()
                 .useMethod()
                 .invoke(pathResponse.getMethod());
