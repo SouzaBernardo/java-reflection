@@ -19,22 +19,6 @@ public class PathService {
                 .replaceFirst(SLASH, "")
                 .split(SLASH);
 
-        String className = capitalize(pathParts[0]);
-        if (pathParts.length == 1) {
-            return new PathResponse(className, null, null);
-        }
-
-        return new PathResponse(className, pathParts[1], null);
-    }
-
-    public PathResponse validPathController(String path) {
-
-        if (!path.startsWith("/"))
-            throw new InvalidPathException(path + " shouldn't start without '/'");
-
-        var pathParts = path.trim()
-                .replaceFirst(SLASH, "")
-                .split(SLASH);
         String simpleClassName = capitalize(pathParts[0]);
         String fullClassName = capitalizeToController(pathParts[0]);
         if (pathParts.length == 1) {
@@ -48,7 +32,6 @@ public class PathService {
         if (className.isBlank())
             throw new InvalidPathException(className + " cannot be blank");
 
-
         var firstCharacter = Character.toUpperCase(className.charAt(0));
         var restString = className.substring(1);
 
@@ -59,11 +42,10 @@ public class PathService {
         if (className.isBlank())
             throw new InvalidPathException(className + " cannot be blank");
 
-
         var firstCharacter = Character.toUpperCase(className.charAt(0));
         var restString = className.substring(1);
 
-        return DOMAIN + firstCharacter + restString;
+        return firstCharacter + restString;
     }
 
 }

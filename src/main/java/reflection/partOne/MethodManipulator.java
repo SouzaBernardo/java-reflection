@@ -1,5 +1,7 @@
 package reflection.partOne;
 
+import reflection.partTwo.response.PathResponse;
+
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -48,6 +50,13 @@ public class MethodManipulator {
                 return handleException.apply(methodName, e);
             throw new RuntimeException(e);
         }
+    }
+
+    public Object invoke(PathResponse pathResponse) {
+        var method = pathResponse.getMethod();
+        if (method.contains("get"))
+            return invoke(method, pathResponse.getParameter());
+        return invoke(method);
     }
 
     private Object getInstance() throws InvocationTargetException, InstantiationException, IllegalAccessException {

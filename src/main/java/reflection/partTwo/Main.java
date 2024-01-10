@@ -5,6 +5,7 @@ import reflection.partTwo.domain.Product;
 import reflection.partTwo.service.PathService;
 
 import java.util.List;
+import java.util.Scanner;
 
 import static reflection.partTwo.util.ProductUtil.createProducts;
 
@@ -18,21 +19,19 @@ public class Main {
 
     public static void main(String[] args) {
 
-//        var scanner = new Scanner(System.in);
-//        var userInput = scanner.nextLine();
-//        var pathResponse = PathService.validPath(userInput);
-        var pathResponse = pathService.validPathController("/product/list");
+        var scanner = new Scanner(System.in);
+        var userInput = scanner.nextLine();
+        do {
+            var pathResponse = pathService.validPath(userInput);
+            var result = Reflection.reflect(pathResponse.getFullClassName())
+                    .constructor()
+                    .useMethod()
+                    .invoke(pathResponse);
+            System.out.println(result);
+            userInput = scanner.nextLine();
+        } while (!userInput.equalsIgnoreCase("z"));
 
-        var result = Reflection.reflect(pathResponse.getFullClassName())
-                .constructor()
-                .useMethod()
-                .invoke(pathResponse.getMethod());
-
-        System.out.println(result);
-
-        var pathResponse2 = pathService.validPathController("/product/1");
-        System.out.println(pathResponse2);
-//        scanner.close();
+        scanner.close();
     }
 
 }

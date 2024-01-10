@@ -10,10 +10,10 @@ public class ProductController {
         return xmlService.convertToXml(PRODUCTS);
     }
 
-    public String getProduct(Long id) {
+    public String getProduct(String id) {
 
         var product = PRODUCTS.stream()
-                .filter(p -> p.getId() == id)
+                .filter(p -> p.getId().equalsIgnoreCase(id) )
                 .findFirst()
                 .orElseThrow();
 

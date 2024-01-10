@@ -6,14 +6,14 @@ import reflection.partTwo.annotations.TagXML;
 public class Product {
 
     @TagXML("id")
-    private final int id;
+    private final String id;
     @TagXML("name")
     private final String name;
     private final Double price;
     @TagXML("brand")
     private final String label;
 
-    public Product(int id, String name, Double price, String label) {
+    public Product(String id, String name, Double price, String label) {
         this.id = id;
         this.name = name;
         this.price = price;
@@ -32,7 +32,7 @@ public class Product {
         return name;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 }
