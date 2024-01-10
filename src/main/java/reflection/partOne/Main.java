@@ -1,5 +1,7 @@
 package reflection.partOne;
 
+import reflection.core.service.Reflection;
+
 import java.lang.reflect.InvocationTargetException;
 import java.util.stream.Stream;
 

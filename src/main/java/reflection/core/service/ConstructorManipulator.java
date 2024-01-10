@@ -1,4 +1,6 @@
-package reflection.partOne;
+package reflection.core.service;
+
+import reflection.core.service.MethodManipulator;
 
 import java.lang.reflect.Constructor;
 

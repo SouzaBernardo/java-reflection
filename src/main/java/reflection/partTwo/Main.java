@@ -1,6 +1,6 @@
 package reflection.partTwo;
 
-import reflection.partOne.Reflection;
+import reflection.core.service.Reflection;
 import reflection.partTwo.domain.Product;
 import reflection.partTwo.service.PathService;
 

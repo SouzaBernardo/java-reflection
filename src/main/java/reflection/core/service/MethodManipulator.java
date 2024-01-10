@@ -1,4 +1,4 @@
-package reflection.partOne;
+package reflection.core.service;
 
 import reflection.partTwo.response.PathResponse;
 

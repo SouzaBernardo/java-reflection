@@ -1,4 +1,4 @@
-package reflection.partOne;
+package reflection.core.service;
 
 import java.lang.reflect.Field;
 import java.util.List;
