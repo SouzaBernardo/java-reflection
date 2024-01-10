@@ -1,12 +1,14 @@
 package reflection.core.service;
 
-import reflection.core.service.MethodManipulator;
+import reflection.core.useCase.ConstructorManipulatorUseCase;
+import reflection.core.useCase.MethodManipulatorUseCase;
 
 import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 
-public class ConstructorManipulator {
+public class ConstructorManipulator implements ConstructorManipulatorUseCase {
     private final Class<?> aClass;
-    private final Constructor<?> constructor;
+    private Constructor<?> constructor;
     private final String constructorParam;
 
 
@@ -24,25 +26,28 @@ public class ConstructorManipulator {
 
     public Object build() {
         try {
-            return aClass.getDeclaredConstructor()
-                    .newInstance();
+            return constructor.newInstance();
         } catch (Exception e) {
             System.out.println("Failure when build object");
             throw new RuntimeException(e);
         }
     }
 
-    public <T> Object build(T parameter) {
+    public Object build(Object... parameters) {
         try {
-            return aClass.getDeclaredConstructor(parameter.getClass())
-                    .newInstance(parameter);
+            return constructor.newInstance(parameters);
         } catch (Exception e) {
-            System.out.println("Failure when build object");
-            throw new RuntimeException(e);
+            try {
+                this.constructor = aClass.getDeclaredConstructor(parameters.getClass());
+                return constructor.newInstance(parameters);
+            } catch (NoSuchMethodException | InvocationTargetException | InstantiationException |
+                     IllegalAccessException ex) {
+                throw new RuntimeException(ex);
+            }
         }
     }
 
-    public MethodManipulator useMethod() {
-        return new MethodManipulator(aClass.getDeclaredMethods(), constructorParam, constructor);
+    public MethodManipulatorUseCase useMethod() {
+        return new MethodManipulatorImpl(aClass.getDeclaredMethods(), constructorParam, this);
     }
 }
