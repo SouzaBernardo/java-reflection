@@ -1,36 +1,38 @@
-package reflection.partOne;
+package reflection.core.service;
 
+import reflection.core.useCase.ConstructorManipulatorUseCase;
+import reflection.core.useCase.MethodManipulatorUseCase;
 import reflection.partTwo.response.PathResponse;
 
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.List;
 import java.util.function.BiFunction;
 
-public class MethodManipulator {
+public class MethodManipulatorImpl implements MethodManipulatorUseCase {
 
     private BiFunction<String, Exception, Object> handleException;
-    private final Constructor<?> constructor;
+    private final ConstructorManipulatorUseCase constructorManipulator;
     private final String constructorParameter;
     private final List<Method> methods;
 
-    public MethodManipulator(Method[] declaredMethods, String constructorParameter, Constructor<?> constructor) {
+    public MethodManipulatorImpl(Method[] declaredMethods,
+                                 String constructorParameter,
+                                 ConstructorManipulatorUseCase constructorManipulator) {
+
         this.methods = List.of(declaredMethods);
         this.constructorParameter = constructorParameter;
-        this.constructor = constructor;
+        this.constructorManipulator = constructorManipulator;
     }
 
-    public MethodManipulator handleException(BiFunction<String, Exception, Object> handle) {
+    public MethodManipulatorImpl handleException(BiFunction<String, Exception, Object> handle) {
         this.handleException = handle;
         return this;
     }
 
-    public Object invoke(String methodName, String parameter) {
-        Method methodToInvoke = null;
+    public Object invoke(String methodName, Object... parameter) {
         try {
             Object instance = getInstance();
-            methodToInvoke = filterMethod(methodName);
+            var methodToInvoke = filterMethod(methodName);
             return methodToInvoke.invoke(instance, parameter);
         } catch (Exception e) {
             if (handleException != null)
@@ -59,11 +61,11 @@ public class MethodManipulator {
         return invoke(method);
     }
 
-    private Object getInstance() throws InvocationTargetException, InstantiationException, IllegalAccessException {
+    private Object getInstance() {
         if (this.constructorParameter.isEmpty())
-            return constructor.newInstance();
+            return constructorManipulator.build();
 
-        return constructor.newInstance(constructorParameter);
+        return constructorManipulator.build(constructorParameter);
     }
 
     private Method filterMethod(String methodName) {

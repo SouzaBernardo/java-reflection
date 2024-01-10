@@ -1,4 +1,4 @@
-package reflection.partOne;
+package reflection.core.service;
 
 
 public class Reflection {

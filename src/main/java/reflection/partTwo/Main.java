@@ -1,6 +1,6 @@
 package reflection.partTwo;
 
-import reflection.partOne.Reflection;
+import reflection.core.service.Reflection;
 import reflection.partTwo.domain.Product;
 import reflection.partTwo.service.PathService;
 
@@ -10,9 +10,6 @@ import java.util.Scanner;
 import static reflection.partTwo.util.ProductUtil.createProducts;
 
 public class Main {
-
-
-
     public static final List<Product> PRODUCTS = createProducts();
     private static final PathService pathService = new PathService();
 

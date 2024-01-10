@@ -1,6 +1,6 @@
 package reflection.partTwo.service;
 
-import reflection.partOne.Reflection;
+import reflection.core.service.Reflection;
 import reflection.partTwo.annotations.TagXML;
 
 import java.lang.reflect.Field;

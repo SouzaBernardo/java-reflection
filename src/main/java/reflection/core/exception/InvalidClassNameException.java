@@ -1,4 +1,4 @@
-package reflection.partTwo.exception;
+package reflection.core.exception;
 
 public class InvalidClassNameException extends RuntimeException {
     public InvalidClassNameException(String className) {

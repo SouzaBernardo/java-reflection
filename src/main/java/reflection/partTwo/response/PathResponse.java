@@ -1,7 +1,7 @@
 package reflection.partTwo.response;
 
-import reflection.partTwo.exception.InvalidClassNameException;
-import reflection.partTwo.exception.InvalidMethodException;
+import reflection.core.exception.InvalidClassNameException;
+import reflection.core.exception.InvalidMethodException;
 
 import static java.util.Objects.isNull;
 
