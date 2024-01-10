@@ -3,8 +3,6 @@ package reflection.partTwo.response;
 import reflection.partTwo.exception.InvalidClassNameException;
 import reflection.partTwo.exception.InvalidMethodException;
 
-import java.util.Objects;
-
 import static java.util.Objects.isNull;
 
 public class PathResponse {

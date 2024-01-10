@@ -3,6 +3,8 @@ package reflection.partTwo.service;
 import reflection.partTwo.exception.InvalidPathException;
 import reflection.partTwo.response.PathResponse;
 
+import static reflection.partTwo.util.StringUtil.capitalize;
+
 public class PathService {
 
     public static final String CONTROLLER = "Controller";
@@ -36,16 +38,6 @@ public class PathService {
         var restString = className.substring(1);
 
         return CONTROLLER_PATH + firstCharacter + restString + CONTROLLER;
-    }
-
-    private static String capitalize(String className) {
-        if (className.isBlank())
-            throw new InvalidPathException(className + " cannot be blank");
-
-        var firstCharacter = Character.toUpperCase(className.charAt(0));
-        var restString = className.substring(1);
-
-        return firstCharacter + restString;
     }
 
 }
