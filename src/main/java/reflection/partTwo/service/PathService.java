@@ -7,6 +7,7 @@ import static reflection.partTwo.util.StringUtil.capitalize;
 
 public class PathService {
 
+    // TODO: Add enum DOMAIN and CONTROLLER
     public static final String CONTROLLER = "Controller";
     public static final String DOMAIN = "reflection.partTwo.domain.";
     public static final String CONTROLLER_PATH = "reflection.partTwo.controller.";
