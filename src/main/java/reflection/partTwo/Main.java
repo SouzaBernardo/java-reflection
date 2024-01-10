@@ -10,9 +10,6 @@ import java.util.Scanner;
 import static reflection.partTwo.util.ProductUtil.createProducts;
 
 public class Main {
-
-
-
     public static final List<Product> PRODUCTS = createProducts();
     private static final PathService pathService = new PathService();
 
