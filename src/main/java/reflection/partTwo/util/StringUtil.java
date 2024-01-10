@@ -1,6 +1,6 @@
 package reflection.partTwo.util;
 
-import reflection.partTwo.exception.InvalidPathException;
+import reflection.core.exception.InvalidPathException;
 
 public class StringUtil {
     public static String capitalize(String className) {
