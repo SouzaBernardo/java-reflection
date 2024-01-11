@@ -1,4 +1,4 @@
-package reflection.partTwo.util;
+package reflection.application.util;
 
 import reflection.core.domain.Product;
 
