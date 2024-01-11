@@ -1,4 +1,4 @@
-package reflection.partTwo.response;
+package reflection.core.response;
 
 import reflection.core.exception.InvalidClassNameException;
 import reflection.core.exception.InvalidMethodException;

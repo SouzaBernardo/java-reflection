@@ -1,6 +1,6 @@
 package reflection.core.useCase;
 
-import reflection.partTwo.response.PathResponse;
+import reflection.core.response.PathResponse;
 
 import java.util.function.BiFunction;
 

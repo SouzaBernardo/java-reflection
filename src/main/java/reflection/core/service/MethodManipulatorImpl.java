@@ -2,7 +2,7 @@ package reflection.core.service;
 
 import reflection.core.useCase.ConstructorManipulatorUseCase;
 import reflection.core.useCase.MethodManipulatorUseCase;
-import reflection.partTwo.response.PathResponse;
+import reflection.core.response.PathResponse;
 
 import java.lang.reflect.Method;
 import java.util.List;

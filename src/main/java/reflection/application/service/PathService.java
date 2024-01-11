@@ -1,7 +1,7 @@
 package reflection.partTwo.service;
 
 import reflection.core.exception.InvalidPathException;
-import reflection.partTwo.response.PathResponse;
+import reflection.core.response.PathResponse;
 
 import static reflection.partTwo.util.StringUtil.capitalize;
 
