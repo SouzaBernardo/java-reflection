@@ -1,15 +1,11 @@
 package reflection;
 
-import reflection.core.service.Reflection;
-import reflection.core.domain.Product;
 import reflection.application.service.PathService;
+import reflection.core.service.Reflection;
 
 import java.lang.reflect.InvocationTargetException;
-import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Stream;
-
-import static reflection.application.util.ProductUtil.createProducts;
 
 public class Main {
 
