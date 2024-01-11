@@ -1,6 +1,6 @@
-package reflection.partTwo.domain;
+package reflection.core.domain;
 
-import reflection.partTwo.annotations.TagXML;
+import reflection.core.annotations.TagXML;
 
 @TagXML("product")
 public class Product {
@@ -18,18 +18,6 @@ public class Product {
         this.name = name;
         this.price = price;
         this.label = label;
-    }
-
-    public String getLabel() {
-        return label;
-    }
-
-    public Double getPrice() {
-        return price;
-    }
-
-    public String getName() {
-        return name;
     }
 
     public String getId() {

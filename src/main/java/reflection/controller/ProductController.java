@@ -1,6 +1,6 @@
 package reflection.controller;
 
-import reflection.partTwo.service.XMLService;
+import reflection.application.service.XMLService;
 
 import static reflection.partTwo.Main.PRODUCTS;
 

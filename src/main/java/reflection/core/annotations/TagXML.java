@@ -1,4 +1,4 @@
-package reflection.partTwo.annotations;
+package reflection.core.annotations;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;

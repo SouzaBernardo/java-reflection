@@ -1,16 +1,15 @@
-package reflection.partTwo.service;
+package reflection.application.service;
 
 import reflection.core.exception.InvalidPathException;
 import reflection.core.response.PathResponse;
 
-import static reflection.partTwo.util.StringUtil.capitalize;
+import static reflection.core.util.StringUtil.capitalize;
 
 public class PathService {
 
     // TODO: Add enum DOMAIN and CONTROLLER
     public static final String CONTROLLER = "Controller";
-    public static final String DOMAIN = "reflection.partTwo.domain.";
-    public static final String CONTROLLER_PATH = "reflection.partTwo.controller.";
+//    public static final String DOMAIN = "reflection.core.domain.";
     public static final String CONTROLLER_PATH = "reflection.controller.";
     public static final String SLASH = "/";
 

@@ -1,6 +1,6 @@
 package reflection.partTwo.util;
 
-import reflection.partTwo.domain.Product;
+import reflection.core.domain.Product;
 
 import java.util.List;
 

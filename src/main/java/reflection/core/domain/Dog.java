@@ -1,4 +1,4 @@
-package reflection.partOne;
+package reflection.core.domain;
 
 public class Dog {
 
