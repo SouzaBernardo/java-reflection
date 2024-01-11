@@ -1,4 +1,4 @@
-package reflection.partTwo;
+package reflection;
 
 import reflection.core.service.Reflection;
 import reflection.core.domain.Product;
@@ -12,7 +12,7 @@ import java.util.stream.Stream;
 import static reflection.application.util.ProductUtil.createProducts;
 
 public class Main {
-    public static final List<Product> PRODUCTS = createProducts();
+
     private static final PathService pathService = new PathService();
     public static final String REFLECTION_DOG = "reflection.core.domain.Dog";
     public static final String METHOD_NAME = "sayHiTo";

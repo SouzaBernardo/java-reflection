@@ -1,10 +1,14 @@
 package reflection.controller;
 
 import reflection.application.service.XMLService;
+import reflection.core.domain.Product;
 
-import static reflection.partTwo.Main.PRODUCTS;
+import java.util.List;
+
+import static reflection.application.util.ProductUtil.createProducts;
 
 public class ProductController {
+    public static final List<Product> PRODUCTS = createProducts();
     private static final XMLService xmlService = new XMLService();
     public String list() {
         return xmlService.convertToXml(PRODUCTS);
