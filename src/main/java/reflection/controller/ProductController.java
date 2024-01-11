@@ -1,4 +1,4 @@
-package reflection.partTwo.controller;
+package reflection.controller;
 
 import reflection.partTwo.service.XMLService;
 

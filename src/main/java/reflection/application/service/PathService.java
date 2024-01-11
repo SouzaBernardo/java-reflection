@@ -11,6 +11,7 @@ public class PathService {
     public static final String CONTROLLER = "Controller";
     public static final String DOMAIN = "reflection.partTwo.domain.";
     public static final String CONTROLLER_PATH = "reflection.partTwo.controller.";
+    public static final String CONTROLLER_PATH = "reflection.controller.";
     public static final String SLASH = "/";
 
     public PathResponse validPath(String path) {
