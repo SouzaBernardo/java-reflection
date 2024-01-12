@@ -34,7 +34,7 @@ public class XMLService {
             closeXMLObject(xmlBuilder, "list");
         } else {
             var objectClass = object.getClass();
-            var fields = ReflectionImpl.reflect(objectClass)
+            var fields = new ReflectionImpl().reflect(objectClass)
                     .declaredFields();
 
             String className = getXmlClassName(objectClass);
