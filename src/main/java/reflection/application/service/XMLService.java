@@ -35,7 +35,7 @@ public class XMLService {
         } else {
             var objectClass = object.getClass();
             var fields = Reflection.reflect(objectClass)
-                    .declaredPrivateFields();
+                    .declaredFields();
 
             String className = getXmlClassName(objectClass);
 

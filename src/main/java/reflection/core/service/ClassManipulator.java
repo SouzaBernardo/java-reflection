@@ -42,10 +42,6 @@ public class ClassManipulator {
     }
 
     public List<Field> declaredFields() {
-        return List.of(aClass.getDeclaredFields());
-    }
-
-    public List<Field> declaredPrivateFields() {
         return Stream.of(aClass.getDeclaredFields())
                 .peek(field -> field.setAccessible(true))
                 .toList();
