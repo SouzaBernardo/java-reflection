@@ -3,10 +3,10 @@ package reflection.core.service;
 
 public class Reflection {
 
-    public static ClassManipulator reflect(String className) {
+    public static ClassManipulatorImpl reflect(String className) {
         try {
             Class<?> aClass = Class.forName(className);
-            return new ClassManipulator(aClass);
+            return new ClassManipulatorImpl(aClass);
         } catch (ClassNotFoundException e) {
             String errorMessage = "Error on Reflect class with name >> " + className;
             System.out.println(errorMessage);
@@ -14,7 +14,7 @@ public class Reflection {
         }
     }
 
-    public static ClassManipulator reflect(Class<?> aClass) {
-            return new ClassManipulator(aClass);
+    public static ClassManipulatorImpl reflect(Class<?> aClass) {
+            return new ClassManipulatorImpl(aClass);
     }
 }

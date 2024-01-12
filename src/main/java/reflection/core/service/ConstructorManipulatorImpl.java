@@ -6,19 +6,19 @@ import reflection.core.useCase.MethodManipulatorUseCase;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
-public class ConstructorManipulator implements ConstructorManipulatorUseCase {
+public class ConstructorManipulatorImpl implements ConstructorManipulatorUseCase {
     private final Class<?> aClass;
     private Constructor<?> constructor;
     private final String constructorParam;
 
 
-    public ConstructorManipulator(Class<?> aClass, Constructor<?> constructor) {
+    public ConstructorManipulatorImpl(Class<?> aClass, Constructor<?> constructor) {
         this.aClass = aClass;
         this.constructor = constructor;
         this.constructorParam = "";
     }
 
-    public ConstructorManipulator(Class<?> aClass, Constructor<?> constructor, String constructorParam) {
+    public ConstructorManipulatorImpl(Class<?> aClass, Constructor<?> constructor, String constructorParam) {
         this.aClass = aClass;
         this.constructor = constructor;
         this.constructorParam = constructorParam;

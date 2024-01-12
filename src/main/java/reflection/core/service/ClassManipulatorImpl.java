@@ -6,37 +6,37 @@ import java.lang.reflect.Field;
 import java.util.List;
 import java.util.stream.Stream;
 
-public class ClassManipulator implements ClassManipulatorUseCase {
+public class ClassManipulatorImpl implements ClassManipulatorUseCase {
     private final Class<?> aClass;
 
-    public ClassManipulator(Class<?> aClass) {
+    public ClassManipulatorImpl(Class<?> aClass) {
         this.aClass = aClass;
     }
 
-    public ConstructorManipulator constructor() {
+    public ConstructorManipulatorImpl constructor() {
         try {
             var declaredConstructor = aClass.getDeclaredConstructor();
-            return new ConstructorManipulator(aClass, declaredConstructor);
+            return new ConstructorManipulatorImpl(aClass, declaredConstructor);
         } catch (NoSuchMethodException e) {
             System.out.println("Error on get Default Constructor");
             return null;
         }
     }
 
-    public ConstructorManipulator constructor(Class<?>... constructorParam) {
+    public ConstructorManipulatorImpl constructor(Class<?>... constructorParam) {
         try {
             var declaredConstructor = aClass.getDeclaredConstructor(constructorParam);
-            return new ConstructorManipulator(aClass, declaredConstructor);
+            return new ConstructorManipulatorImpl(aClass, declaredConstructor);
         } catch (NoSuchMethodException e) {
             System.out.println("Constructor not found");
             throw new RuntimeException(e);
         }
     }
 
-    public ConstructorManipulator constructor(String constructorParam) {
+    public ConstructorManipulatorImpl constructor(String constructorParam) {
         try {
             var declaredConstructor = aClass.getDeclaredConstructor(constructorParam.getClass());
-            return new ConstructorManipulator(aClass, declaredConstructor, constructorParam);
+            return new ConstructorManipulatorImpl(aClass, declaredConstructor, constructorParam);
         } catch (NoSuchMethodException e) {
             System.out.println("Constructor not found");
             throw new RuntimeException(e);
