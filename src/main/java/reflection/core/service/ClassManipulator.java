@@ -1,10 +1,12 @@
 package reflection.core.service;
 
+import reflection.core.useCase.ClassManipulatorUseCase;
+
 import java.lang.reflect.Field;
 import java.util.List;
 import java.util.stream.Stream;
 
-public class ClassManipulator {
+public class ClassManipulator implements ClassManipulatorUseCase {
     private final Class<?> aClass;
 
     public ClassManipulator(Class<?> aClass) {
@@ -21,7 +23,7 @@ public class ClassManipulator {
         }
     }
 
-    public ConstructorManipulator constructor(Class<?> constructorParam) {
+    public ConstructorManipulator constructor(Class<?>... constructorParam) {
         try {
             var declaredConstructor = aClass.getDeclaredConstructor(constructorParam);
             return new ConstructorManipulator(aClass, declaredConstructor);
