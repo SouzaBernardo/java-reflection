@@ -1,7 +1,7 @@
 package reflection;
 
 import reflection.application.service.PathService;
-import reflection.core.service.Reflection;
+import reflection.core.service.ReflectionImpl;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Scanner;
@@ -12,6 +12,7 @@ public class Main {
     private static final PathService pathService = new PathService();
     public static final String REFLECTION_DOG = "reflection.core.domain.Dog";
     public static final String METHOD_NAME = "sayHiTo";
+    public static final ReflectionImpl REFLECTION_IMPL_SERVICE = new ReflectionImpl();
 
     public static void main(String[] args) {
 
@@ -19,7 +20,7 @@ public class Main {
         var userInput = scanner.nextLine();
         do {
             var pathResponse = pathService.validPath(userInput);
-            var result = Reflection.reflect(pathResponse.getFullClassName())
+            var result = REFLECTION_IMPL_SERVICE.reflect(pathResponse.getFullClassName())
                     .constructor()
                     .useMethod()
                     .invoke(pathResponse);
@@ -42,7 +43,7 @@ public class Main {
     
 
     private static void exampleInvokeWithMethodManipulator() {
-        var instance = Reflection
+        var instance = REFLECTION_IMPL_SERVICE
                 .reflect(REFLECTION_DOG)
                 .constructor("Little Dog")
                 .useMethod()
@@ -55,11 +56,11 @@ public class Main {
     }
 
     private static void exampleMethodWithParameters() throws InvocationTargetException, IllegalAccessException {
-        var myClass = Reflection
+        var myClass = REFLECTION_IMPL_SERVICE
                 .reflect(REFLECTION_DOG)
                 .getReflectedClass();
 
-        var instance = Reflection
+        var instance = REFLECTION_IMPL_SERVICE
                 .reflect(REFLECTION_DOG)
                 .constructor(String.class)
                 .build("Little Dog");
@@ -77,7 +78,7 @@ public class Main {
         var myClass = Class.forName(REFLECTION_DOG);
 
         var declaredMethod = myClass.getDeclaredMethods()[0];
-        var invoke = Reflection
+        var invoke = REFLECTION_IMPL_SERVICE
                 .reflect(REFLECTION_DOG)
                 .constructor()
                 .build();
@@ -85,7 +86,7 @@ public class Main {
     }
 
     private static void exampleConstructorByBuilder() {
-        var invoke = Reflection
+        var invoke = REFLECTION_IMPL_SERVICE
                 .reflect(REFLECTION_DOG)
                 .constructor()
                 .build();

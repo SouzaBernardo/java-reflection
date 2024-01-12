@@ -1,6 +1,6 @@
 package reflection.application.service;
 
-import reflection.core.service.Reflection;
+import reflection.core.service.ReflectionImpl;
 import reflection.core.annotations.TagXML;
 
 import java.lang.reflect.Field;
@@ -34,7 +34,7 @@ public class XMLService {
             closeXMLObject(xmlBuilder, "list");
         } else {
             var objectClass = object.getClass();
-            var fields = Reflection.reflect(objectClass)
+            var fields = ReflectionImpl.reflect(objectClass)
                     .declaredFields();
 
             String className = getXmlClassName(objectClass);

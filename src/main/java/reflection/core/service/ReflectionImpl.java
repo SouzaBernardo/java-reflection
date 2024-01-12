@@ -1,9 +1,11 @@
 package reflection.core.service;
 
 
-public class Reflection {
+import reflection.core.useCase.ReflectionUseCase;
 
-    public static ClassManipulatorImpl reflect(String className) {
+public class ReflectionImpl implements ReflectionUseCase {
+
+    public ClassManipulatorImpl reflect(String className) {
         try {
             Class<?> aClass = Class.forName(className);
             return new ClassManipulatorImpl(aClass);
@@ -14,7 +16,7 @@ public class Reflection {
         }
     }
 
-    public static ClassManipulatorImpl reflect(Class<?> aClass) {
+    public ClassManipulatorImpl reflect(Class<?> aClass) {
             return new ClassManipulatorImpl(aClass);
     }
 }
