@@ -1,4 +1,4 @@
-package reflection.core.util;
+package reflection.application.util;
 
 import reflection.application.exception.InvalidPathException;
 

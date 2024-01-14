@@ -48,8 +48,4 @@ public class ClassManipulatorUseCaseImpl implements ClassManipulatorUseCase {
                 .peek(field -> field.setAccessible(true))
                 .toList();
     }
-
-    public Class<?> getReflectedClass() {
-        return aClass;
-    }
 }

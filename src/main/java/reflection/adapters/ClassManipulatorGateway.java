@@ -9,5 +9,4 @@ public interface ClassManipulatorGateway {
     ConstructorManipulatorUseCase constructor();
     ConstructorManipulatorUseCase constructor(Class<?>... constructorParam);
     List<Field> declaredFields();
-    Class<?> getReflectedClass();
 }

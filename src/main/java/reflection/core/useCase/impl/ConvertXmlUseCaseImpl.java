@@ -1,7 +1,7 @@
-package reflection.application.service;
+package reflection.core.useCase.impl;
 
-import reflection.core.useCase.impl.ReflectionUseCaseImpl;
 import reflection.core.annotations.TagXML;
+import reflection.core.useCase.ConvertXmlUseCase;
 
 import java.lang.reflect.Field;
 import java.util.Collection;
@@ -9,11 +9,10 @@ import java.util.Collection;
 import static java.util.Objects.nonNull;
 import static java.util.Objects.requireNonNull;
 
-public class XMLService {
+public class ConvertXmlUseCaseImpl implements ConvertXmlUseCase {
 
     public static final String GAP = "  ";
     private static int GAPS = 0;
-
 
     public String convertToXml(Object object) {
         try {

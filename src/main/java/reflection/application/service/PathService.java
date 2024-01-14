@@ -3,17 +3,13 @@ package reflection.application.service;
 import reflection.application.exception.InvalidPathException;
 import reflection.core.response.PathResponse;
 
-import static reflection.core.util.StringUtil.capitalize;
+import static reflection.application.enumeration.PathTypes.CONTROLLER;
+import static reflection.application.util.StringUtil.capitalize;
 
 public class PathService {
-
-    // TODO: Add enum DOMAIN and CONTROLLER
-    public static final String CONTROLLER = "Controller";
-//    public static final String DOMAIN = "reflection.core.domain.";
-    public static final String CONTROLLER_PATH = "reflection.controller.";
     public static final String SLASH = "/";
 
-    public PathResponse validPath(String path) {
+    public PathResponse validPath(String path, String packagePath) {
 
         if (!path.startsWith("/"))
             throw new InvalidPathException(path + " shouldn't start without '/'");
@@ -23,7 +19,7 @@ public class PathService {
                 .split(SLASH);
 
         String simpleClassName = capitalize(pathParts[0]);
-        String fullClassName = capitalizeToController(pathParts[0]);
+        String fullClassName = capitalizeToController(pathParts[0], packagePath);
         if (pathParts.length == 1) {
             return new PathResponse(fullClassName, null, simpleClassName);
         }
@@ -31,14 +27,14 @@ public class PathService {
         return new PathResponse(fullClassName, pathParts[1], simpleClassName);
     }
 
-    private static String capitalizeToController(String className) {
+    private static String capitalizeToController(String className, String packagePath) {
         if (className.isBlank())
             throw new InvalidPathException(className + " cannot be blank");
 
         var firstCharacter = Character.toUpperCase(className.charAt(0));
         var restString = className.substring(1);
 
-        return CONTROLLER_PATH + firstCharacter + restString + CONTROLLER;
+        return packagePath + firstCharacter + restString + CONTROLLER.getValue();
     }
 
 }

@@ -27,8 +27,4 @@ public class ClassManipulatorGatewayImpl implements ClassManipulatorGateway {
     public List<Field> declaredFields() {
         return classManipulator.declaredFields();
     }
-
-    public Class<?> getReflectedClass() {
-        return classManipulator.getReflectedClass();
-    }
 }

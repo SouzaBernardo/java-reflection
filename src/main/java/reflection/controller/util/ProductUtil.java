@@ -1,10 +1,15 @@
-package reflection.application.util;
+package reflection.controller.util;
 
 import reflection.core.domain.Product;
 
 import java.util.List;
 
 public class ProductUtil {
+
+    /**
+     * Simulate products in repository
+     * return a list of products
+     * */
     public static List<Product> createProducts() {
         return List.of(
                 new Product("1", "name1", 20.0, "label1"),
