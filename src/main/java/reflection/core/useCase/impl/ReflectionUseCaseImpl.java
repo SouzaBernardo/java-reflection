@@ -1,6 +1,7 @@
 package reflection.core.useCase.impl;
 
 
+import reflection.core.exception.ReflectClassException;
 import reflection.core.useCase.ReflectionUseCase;
 import reflection.core.useCase.impl.ClassManipulatorUseCaseImpl;
 
@@ -20,7 +21,7 @@ public class ReflectionUseCaseImpl implements ReflectionUseCase {
         } catch (ClassNotFoundException e) {
             String errorMessage = "Error on Reflect class with name >> " + className;
             System.out.println(errorMessage);
-            throw new RuntimeException(errorMessage, e); // TODO: Custom exception here
+            throw new ReflectClassException(errorMessage, e);
         }
     }
 }
