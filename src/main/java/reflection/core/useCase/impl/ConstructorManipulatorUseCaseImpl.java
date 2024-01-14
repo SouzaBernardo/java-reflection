@@ -1,24 +1,25 @@
-package reflection.core.service;
+package reflection.core.useCase.impl;
 
 import reflection.core.useCase.ConstructorManipulatorUseCase;
 import reflection.core.useCase.MethodManipulatorUseCase;
+import reflection.core.useCase.impl.MethodManipulatorUseCaseImpl;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
-public class ConstructorManipulatorImpl implements ConstructorManipulatorUseCase {
+public class ConstructorManipulatorUseCaseImpl implements ConstructorManipulatorUseCase {
     private final Class<?> aClass;
     private Constructor<?> constructor;
     private final String constructorParam;
 
 
-    public ConstructorManipulatorImpl(Class<?> aClass, Constructor<?> constructor) {
+    public ConstructorManipulatorUseCaseImpl(Class<?> aClass, Constructor<?> constructor) {
         this.aClass = aClass;
         this.constructor = constructor;
         this.constructorParam = "";
     }
 
-    public ConstructorManipulatorImpl(Class<?> aClass, Constructor<?> constructor, String constructorParam) {
+    public ConstructorManipulatorUseCaseImpl(Class<?> aClass, Constructor<?> constructor, String constructorParam) {
         this.aClass = aClass;
         this.constructor = constructor;
         this.constructorParam = constructorParam;
@@ -48,6 +49,6 @@ public class ConstructorManipulatorImpl implements ConstructorManipulatorUseCase
     }
 
     public MethodManipulatorUseCase useMethod() {
-        return new MethodManipulatorImpl(aClass.getDeclaredMethods(), constructorParam, this);
+        return new MethodManipulatorUseCaseImpl(aClass.getDeclaredMethods(), constructorParam, this);
     }
 }

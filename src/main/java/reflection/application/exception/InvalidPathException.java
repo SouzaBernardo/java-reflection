@@ -1,4 +1,4 @@
-package reflection.core.exception;
+package reflection.application.exception;
 
 public class InvalidPathException extends RuntimeException {
     public InvalidPathException(String message) {

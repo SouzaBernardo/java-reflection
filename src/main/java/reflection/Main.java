@@ -1,7 +1,7 @@
 package reflection;
 
 import reflection.application.service.PathService;
-import reflection.core.service.ReflectionImpl;
+import reflection.core.useCase.impl.ReflectionUseCaseImpl;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Scanner;
@@ -12,7 +12,7 @@ public class Main {
     private static final PathService pathService = new PathService();
     public static final String REFLECTION_DOG = "reflection.core.domain.Dog";
     public static final String METHOD_NAME = "sayHiTo";
-    public static final ReflectionImpl REFLECTION_IMPL_SERVICE = new ReflectionImpl();
+    public static final ReflectionUseCaseImpl REFLECTION_IMPL_SERVICE = new ReflectionUseCaseImpl();
 
     public static void main(String[] args) {
 

@@ -1,4 +1,4 @@
-package reflection.core.service;
+package reflection.core.useCase.impl;
 
 import reflection.core.useCase.ConstructorManipulatorUseCase;
 import reflection.core.useCase.MethodManipulatorUseCase;
@@ -8,23 +8,23 @@ import java.lang.reflect.Method;
 import java.util.List;
 import java.util.function.BiFunction;
 
-public class MethodManipulatorImpl implements MethodManipulatorUseCase {
+public class MethodManipulatorUseCaseImpl implements MethodManipulatorUseCase {
 
     private BiFunction<String, Exception, Object> handleException;
     private final ConstructorManipulatorUseCase constructorManipulator;
     private final String constructorParameter;
     private final List<Method> methods;
 
-    public MethodManipulatorImpl(Method[] declaredMethods,
-                                 String constructorParameter,
-                                 ConstructorManipulatorUseCase constructorManipulator) {
+    public MethodManipulatorUseCaseImpl(Method[] declaredMethods,
+                                        String constructorParameter,
+                                        ConstructorManipulatorUseCase constructorManipulator) {
 
         this.methods = List.of(declaredMethods);
         this.constructorParameter = constructorParameter;
         this.constructorManipulator = constructorManipulator;
     }
 
-    public MethodManipulatorImpl handleException(BiFunction<String, Exception, Object> handle) {
+    public MethodManipulatorUseCaseImpl handleException(BiFunction<String, Exception, Object> handle) {
         this.handleException = handle;
         return this;
     }
